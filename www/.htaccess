@@ -1,0 +1,5 @@
+AddDefaultCharset Off
+<IfModule mod_charset.c>
+    CharsetDisable On
+    CharsetRecodeMultipartForms Off
+</IfModule>
