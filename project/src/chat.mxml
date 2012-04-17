@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009"  layout="absolute" backgroundAlpha="0"
+			    xmlns:s="library://ns.adobe.com/flex/spark"
+			    xmlns:mx="library://ns.adobe.com/flex/mx"
+			    width="666" height="289" creationComplete="init()">
+	<fx:Script source="script.as" />	
+	<fx:Declarations>
+		<mx:SoundEffect id="SoundSend" source="@Embed(source='assets/sound.mp3')" volumeFrom="0.1" volumeTo="0.1" target="{this}"/>
+		<mx:SoundEffect id="SoundIn" source="@Embed(source='assets/sndMsg.mp3')" volumeFrom="0.1" volumeTo="0.1" target="{this}"/>
+	</fx:Declarations>
+	<mx:Image x="375" y="0" source="assets/vbg.png"/>
+	<mx:VideoDisplay id="remoteVideoDisplay"  x="392" y="6" width="256" height="192" backgroundImage="assets/video.jpg" visible="true"/>
+	<mx:Label x="388" y="198" color="#BEBEBE" fontFamily="Arial" fontSize="10" text="Нажмите  аудио/видео  вызов  чтобы  начать разговор"/>
+	<mx:Button id="audiobutton" click="startAudio()" x="388" y="217" width="50" height="25" 
+			   upIcon="@Embed(source='assets/audio.png')" 
+			   overIcon="@Embed(source='assets/audio1.png')" 
+			   downIcon="@Embed(source='assets/audio2.png')" 
+			   selectedDownIcon="@Embed(source='assets/audio2.png')" 
+			   selectedOverIcon="@Embed(source='assets/audio2.png')" 
+			   selectedUpIcon="@Embed(source='assets/audio2.png')"/>
+	<mx:Button id="videobutton" click="startVideo()" x="445" y="217" width="50" height="25" 
+			   upIcon="@Embed(source='assets/video.png')" 
+			   overIcon="@Embed(source='assets/video1.png')" 
+			   downIcon="@Embed(source='assets/video2.png')" 
+			   selectedDownIcon="@Embed(source='assets/video2.png')" 
+			   selectedOverIcon="@Embed(source='assets/video2.png')" 
+			   selectedUpIcon="@Embed(source='assets/video2.png')"/>
+	<mx:Button id="callbutton" click="stopCall()" x="503" y="217" width="50" height="25" 
+			   icon="@Embed(source='assets/phone.png')" 
+			   overIcon="@Embed(source='assets/phone1.png')" 
+			   downIcon="@Embed(source='assets/phone.png')"/>
+	<mx:HSlider id="speakerVolumeSlider" change="speakerVolumeChanged(event)"
+				trackSkin="@Embed(source='assets/track.png')"
+				x="561" y="217" width="95" height="25"
+				dataTipPrecision="0" liveDragging="true"
+				maximum="100" minimum="1" showTrackHighlight="true" snapInterval="1"
+				thumbSkin="@Embed(source='assets/pointer.png')"/>
+	<mx:Button x="472" y="253" width="81" height="22" id="endchatbutton" 
+			   icon="@Embed(source='assets/close.png')" 
+			   overIcon="@Embed(source='assets/close2.png')" 
+			   click="ExternalInterface.call('endChat')"/>
+	
+	<mx:Image x="0" y="0" source="assets/cbg.png"/>
+	<mx:TextArea id="chat_txt"  x="10" y="10" width="335" height="105" 
+				 selectable="true" editable="false" wordWrap="true" backgroundImage="assets/text.png"/>
+	<mx:Label x="10" y="117" color="#FFFFFF" fontFamily="Arial" fontSize="12" text="Новое сообщение"/>
+	<mx:TextArea id="input_txt" x="10" y="140" width="335" height="105" 
+				 backgroundImage="assets/text.png" keyDown="ctrlEnter(event)"/>
+	<mx:Button x="18" y="257" width="99" height="22" id="sendbutton" 
+			   icon="@Embed(source='assets/send.png')" 
+			   overIcon="@Embed(source='assets/send2.png')" 
+			   click="sendText()"/>
+	<mx:Button x="226" y="257" width="99" height="22" id="mailbutton"
+			   icon="@Embed(source='assets/mail.png')" 
+			   overIcon="@Embed(source='assets/mail2.png')" 
+			   click="ExternalInterface.call('sendMessage')"/>
+	<mx:Image x="315" y="114" source="@Embed(source='assets/soundoff.png')" id="sof" visible="false" click="saundof()"/>
+	<mx:Image x="320" y="114" source="@Embed(source='assets/soundon.png')" id="son" click="saundon()"/>
+	<s:Label id="timecall" x="593" y="185" width="51" height="10" backgroundColor="white"
+			 color="green" fontWeight="bold" textAlign="right" verticalAlign="middle"/>
+</mx:Application>
